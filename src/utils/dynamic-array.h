@@ -9,8 +9,9 @@ typedef struct {
 typedef struct HistoryArray {
     History **history;    
     int length;
-    void (*add_text) (struct HistoryArray *str_arr, char *date, char *message);
+    void (*add_history_log) (struct HistoryArray *str_arr, char *date, char *message);
+    void (*remove_history_log) (struct HistoryArray *history_arr);
 } HistoryArray ;
 
-void add_text(HistoryArray *history_arr, char *date, char *message);
+void add_history_log(HistoryArray *history_arr, char *date, char *message);
 #endif

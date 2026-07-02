@@ -23,9 +23,9 @@ void add_history_elements(
     history_arr->history[history_arr->length - 1]->message[i] = '\0';
 }
 
-void add_text(HistoryArray *history_arr, char *date, char *message) {
+void add_history_log(HistoryArray *history_arr, char *date, char *message) {
     if (history_arr == NULL) {
-        printf("history not found");
+        printf("error : history not found");
         return;
     }
     history_arr->length++;
@@ -39,3 +39,11 @@ void add_text(HistoryArray *history_arr, char *date, char *message) {
     
 }
 
+void remove_history_log(char* file_name) {
+    FILE *log_file = fopen(file_name, "w");
+    if (log_file == NULL) {
+        printf("error : delete log file content failed");
+        return;
+    }
+    fclose(log_file);
+}
