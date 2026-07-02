@@ -24,6 +24,10 @@ void add_history_elements(
 }
 
 void add_text(HistoryArray *history_arr, char *date, char *message) {
+    if (history_arr == NULL) {
+        printf("history not found");
+        return;
+    }
     history_arr->length++;
     history_arr->history = realloc(history_arr->history, history_arr->length * sizeof(History*));
     history_arr->history[history_arr->length - 1] = malloc(sizeof(History));
