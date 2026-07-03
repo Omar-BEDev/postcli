@@ -4,8 +4,14 @@
 //DATE FORMAT : "2026/12/30"
 #define LAST_YEAR_INDEX_POSITION 3 
 #define FIRST_MONTH_INDEX_POSITION 5
-#define LAST_MONTH_INDEX_POITION 6
+#define LAST_MONTH_INDEX_POSITION 6
 #define FIRST_DAY_INDEX_POSITION 8
 #define LAST_DAY_INDEX_POSITION 9
+#define DATE_LENGTH 10
 
+typedef struct Date{
+    int year;
+    int month;
+    int day;
+} Date;
 #endif
