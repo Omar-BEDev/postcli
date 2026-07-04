@@ -1,9 +1,12 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -g
+
+CFLAGS = -Wall -Wextra -g -Isrc 
 TARGET = postcli
 
 SRCS = src/main.c \
-	   src/core/History.c \
+       src/core/history.c \
+       src/core/date-compare.c \
+       src/core/search.c \
        src/core/json_parsee.c \
        src/utils/dynamic-array.c
 
