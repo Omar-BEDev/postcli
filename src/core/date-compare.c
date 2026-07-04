@@ -1,4 +1,4 @@
-#include "history.h"
+#include "date-compare.h"
 
 Date str_to_date(char *date) {
   int year = 0;

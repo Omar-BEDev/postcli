@@ -1,5 +1,5 @@
-#include "../utils/dynamic-array.h"
-#include "history.h"
+#include "../../utils/dynamic-array.h"
+#include "../date-compare.h"
 #include <stdlib.h>
 
 void first_history_index(HistoryArray *history_arr, int low, 

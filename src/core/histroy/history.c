@@ -1,5 +1,5 @@
 #include "history.h"
-#include "../utils/dynamic-array.h"
+#include "../../utils/dynamic-array.h"
 #include "search.h"
 
 void search_history_indexes(HistoryArray *history_arr, char *date, int *indexes) {
