@@ -10,7 +10,7 @@ void first_history_index(HistoryArray *history_arr, int low,
   while (low <= high) {
     mid = (low + high) / 2;
 
-    if (strcmp(history_arr->history[mid]->date, date) == 1) {
+    if (strcmp(history_arr->history[mid]->date, date) == 0) {
       indexes[0] = mid;
       low = mid + 1;
     }
@@ -35,8 +35,8 @@ void last_history_index(HistoryArray *history_arr, int low,
     high = history_arr->length - 1;
     while(low <= high) {
         mid = (low + high) / 2;
-        if (strcmp(history_arr->history[mid]->date, date) == 1) {
-            indexes[0] = mid;
+        if (strcmp(history_arr->history[mid]->date, date) == 0) {
+            indexes[1] = mid;
             low = mid + 1;
         }
         if (is_date_bigger(history_arr->history[mid]->date, date) == 1) {
