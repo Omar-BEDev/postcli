@@ -1,6 +1,6 @@
 #ifndef DATE_COMPARE
 #define DATE_COMPARE
-#include "histroy/history.h"
+#include "history/history.h"
 
 
 typedef struct Date{
