@@ -8,8 +8,8 @@ SRCS = src/main.c \
        src/core/date-compare.c \
        src/core/search.c \
        src/core/json_parsee.c \
-       src/utils/dynamic-array.c
-
+       src/utils/dynamic-array.c \
+       src/io/logs.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(TARGET)
