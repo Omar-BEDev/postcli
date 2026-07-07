@@ -22,7 +22,7 @@ void first_history_index(HistoryArray *history_arr, int low,
       
     }
   }
-  if (low > high) {
+  if (strcmp(history_arr->history[mid]->date, date) != 0) {
     indexes[0] = -1;
   }
 }
@@ -46,7 +46,7 @@ void last_history_index(HistoryArray *history_arr, int low,
             high = mid - 1;
         }
     }
-    if (low > high) {
+    if (strcmp(history_arr->history[mid]->date, date) != 0) {
       indexes[1] = -1;
     }
 }
