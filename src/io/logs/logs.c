@@ -3,6 +3,20 @@
 #include <stdio.h>
 
 
+void log_path_generate(char *dir) {
+   char program_path[512];
+   char *program_folder_name = "postcli";
+   char *log_file_name = "logs.log";
+    strcpy(program_path,program_folder_name);
+    strcat(program_path,"/");
+    strcat(program_path,log_file_name);
+
+   if (make_folder(program_folder_name) == 0) {
+        FILE *log_file = fopen(program_path, "w");
+        fclose(log_file);
+   }
+}
+
 void read_file_logs(HistoryArray *history_arr, FILE *log_file) {
     char buf[1024];
     char date[11];
