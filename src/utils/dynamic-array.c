@@ -3,25 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void add_history_elements(
-    HistoryArray *history_arr, char *date, int date_length,
-    char *message, int message_length
-) {
-    int i = 0;
-    while (i < date_length) {
-        history_arr->history[history_arr->length - 1]->date[i] = date[i];
-        i++;
-    }
-    history_arr->history[history_arr->length - 1]->date[i] = '\0';
 
-    i = 0;
-    while (i < message_length) {
-        history_arr->history[history_arr->length - 1]->message[i] = message[i];
-        i++;
-    }
-
-    history_arr->history[history_arr->length - 1]->message[i] = '\0';
-}
 
 void add_history_log(HistoryArray *history_arr, char *date, char *message) {
     if (history_arr == NULL) {
@@ -35,12 +17,12 @@ void add_history_log(HistoryArray *history_arr, char *date, char *message) {
     int message_length = strlen(message);
     history_arr->history[history_arr->length - 1]->date = malloc(date_length * sizeof(char) + 1);
     history_arr->history[history_arr->length - 1]->message = malloc(message_length * sizeof(char) + 1);
-    add_history_elements(history_arr, date, date_length, message, message_length);
-    
+    strcpy(history_arr->history[history_arr->length - 1]->date,date);
+    strcpy(history_arr->history[history_arr->length - 1]->message,message);
 }
 
 void remove_history_log(char* file_name) {
-    FILE *log_file = fopen(file_name, "w");
+    FILE *log_file = fopen(file_name, "a");
     if (log_file == NULL) {
         printf("error : delete log file content failed");
         return;
