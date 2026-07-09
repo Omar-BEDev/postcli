@@ -22,7 +22,7 @@ void add_history_log(HistoryArray *history_arr, char *date, char *message) {
 }
 
 void remove_history_log(char* file_name) {
-    FILE *log_file = fopen(file_name, "a");
+    FILE *log_file = fopen(file_name, "w");
     if (log_file == NULL) {
         printf("error : delete log file content failed");
         return;
