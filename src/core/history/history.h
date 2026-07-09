@@ -1,6 +1,6 @@
 #ifndef HISTORY
 #define HISTORY
-
+#include "../../utils/dynamic-array.h"
 //DATE FORMAT : "2026/12/30"
 #define LAST_YEAR_INDEX_POSITION 3 
 #define FIRST_MONTH_INDEX_POSITION 5
@@ -8,5 +8,5 @@
 #define FIRST_DAY_INDEX_POSITION 8
 #define LAST_DAY_INDEX_POSITION 9
 #define DATE_LENGTH 10
-
+void search_history_indexes(HistoryArray *history_arr, char *date, int *indexes);
 #endif
