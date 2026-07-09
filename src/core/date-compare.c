@@ -13,15 +13,19 @@ Date str_to_date(char *date) {
       year += (date[i] - 48) * (year_length_value);
     }
     if (i >= FIRST_MONTH_INDEX_POSITION && i <= LAST_MONTH_INDEX_POSITION) {
-      month += (date[i] - 48) * 10;
       if (i == LAST_MONTH_INDEX_POSITION) {
         month += date[i] - 48;
       }
+      else {
+      month += (date[i] - 48) * 10;
+      }
     }
     if (i >= FIRST_DAY_INDEX_POSITION && i <= LAST_DAY_INDEX_POSITION) {
-      day += (date[i] - 48) * 10;
       if (i == LAST_DAY_INDEX_POSITION) {
         day += date[i] - 48;
+      }
+      else {
+      day += (date[i] - 48) * 10;
       }
     }
     i++;
