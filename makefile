@@ -9,7 +9,7 @@ SRCS = src/main.c \
        src/core/history/search.c \
        src/core/json_parsee.c \
        src/utils/dynamic-array.c \
-       src/io/logs.c
+       src/io/logs/logs.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(TARGET)
