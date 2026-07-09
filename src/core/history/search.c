@@ -18,10 +18,10 @@ void first_history_index(HistoryArray *history_arr, int low,
       high = mid - 1;
     }
     if (is_date_bigger(history_arr->history[mid]->date, date) == 1) {
-      low = mid + 1;
+      high = mid - 1;
     }
     if (is_date_small(history_arr->history[mid]->date, date) == 1) {
-      high = mid - 1;
+      low = mid + 1;
       
     }
   }
@@ -45,10 +45,10 @@ void last_history_index(HistoryArray *history_arr, int low,
             low = mid + 1;
         }
         if (is_date_bigger(history_arr->history[mid]->date, date) == 1) {
-            low = mid + 1;
+            high = mid - 1;
         }
         if (is_date_small(history_arr->history[mid]->date, date) == 1) {
-            high = mid - 1;
+            low = mid + 1;
         }
     }
     if (strcmp(history_arr->history[match]->date, date) != 0) {
