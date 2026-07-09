@@ -12,7 +12,7 @@ void make_log_file(char *log_file_name) {
 }
 
 void show_program_logo() {
-    FILE *logo_file = fopen("logo.txt","r");
+    FILE *logo_file = fopen("src/utils/logo.txt","r");
     if (logo_file == NULL) {
         printf("error: logo not found");
         return;
