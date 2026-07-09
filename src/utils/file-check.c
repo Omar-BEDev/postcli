@@ -4,5 +4,5 @@ int is_file_available(const char *file_name) {
     if(stat(file_name, &buf) == 0) {
         return S_ISREG(buf.st_mode);
     }
-    return 0;
+    return -1;
 }
