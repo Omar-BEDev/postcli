@@ -5,6 +5,12 @@
 
 
 
+/**
+ * @brief Adds a history log to the array
+ * @param history_arr The history array
+ * @param date The date of the log
+ * @param message The log message
+ */
 void add_history_log(HistoryArray *history_arr, char *date, char *message) {
     if (history_arr == NULL) {
         printf("error : history not found");
@@ -21,6 +27,10 @@ void add_history_log(HistoryArray *history_arr, char *date, char *message) {
     strcpy(history_arr->history[history_arr->length - 1]->message,message);
 }
 
+/**
+ * @brief Removes the history log file
+ * @param file_name The name of the file to remove
+ */
 void remove_history_log(char* file_name) {
     FILE *log_file = fopen(file_name, "w");
     if (log_file == NULL) {

@@ -2,6 +2,13 @@
 #include "../../utils/dynamic-array.h"
 #include <stdio.h>
 
+/**
+ * @brief Creates the log file directory path
+ * @param program_path The output path
+ * @param dir The base directory
+ * @param program_folder_name The folder name
+ * @param log_file_name The log file name
+ */
 void make_log_dir(char *program_path, char *dir,
                        char *program_folder_name, char *log_file_name) {
   strcpy(program_path, dir);
@@ -11,6 +18,12 @@ void make_log_dir(char *program_path, char *dir,
   strcat(program_path, log_file_name);
 }
 
+/**
+ * @brief Creates the log folder directory path
+ * @param folder_path The output path
+ * @param dir The base directory
+ * @param program_folder_name The folder name
+ */
 void make_log_folder_dir(char *folder_path,char *dir, char *program_folder_name) {
     strcpy(folder_path, dir);
     strcat(folder_path, "/");
@@ -18,6 +31,10 @@ void make_log_folder_dir(char *folder_path,char *dir, char *program_folder_name)
 }
 
 
+/**
+ * @brief Generates the path for the log directory
+ * @param dir The directory path
+ */
 void log_path_generate(char *dir) {
   char program_path[512];
   char folder_path[256];
@@ -35,6 +52,11 @@ void log_path_generate(char *dir) {
   }
 }
 
+/**
+ * @brief Reads logs from a file and stores them
+ * @param history_arr The history array to populate
+ * @param log_file The file pointer to read from
+ */
 void read_file_logs(HistoryArray *history_arr, FILE *log_file) {
   char buf[1024];
   char date[11];
@@ -62,6 +84,11 @@ void read_file_logs(HistoryArray *history_arr, FILE *log_file) {
   }
 }
 
+/**
+ * @brief Extracts logs from a given path
+ * @param history_arr The history array to extract to
+ * @param path The path of the log file
+ */
 void extract_logs(HistoryArray *history_arr, char *path) {
   FILE *log_file = fopen(path, "r");
   if (log_file == NULL) {

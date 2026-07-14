@@ -3,6 +3,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * @brief Makes a log file if it does not exist
+ * @param log_file_name The name of the log file
+ */
 void make_log_file(char *log_file_name) {
   if (is_file_available(log_file_name) == -1) {
     log_path_generate(LINUX_HOME_DIR);
@@ -11,6 +15,9 @@ void make_log_file(char *log_file_name) {
   }
 }
 
+/**
+ * @brief Shows the program logo
+ */
 void show_program_logo() {
     FILE *logo_file = fopen("src/utils/logo.txt","r");
     if (logo_file == NULL) {

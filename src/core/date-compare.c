@@ -1,5 +1,10 @@
 #include "date-compare.h"
 
+/**
+ * @brief Converts a string to a Date structure
+ * @param date The date string to convert
+ * @return The Date structure
+ */
 Date str_to_date(char *date) {
   int year = 0;
   int month = 0;
@@ -34,6 +39,12 @@ Date str_to_date(char *date) {
   return result;
 }
 
+/**
+ * @brief Checks if current_date is strictly greater than date
+ * @param current_date The current date string
+ * @param date The date string to compare against
+ * @return 1 if current_date is bigger, 0 otherwise
+ */
 int is_date_bigger(char *current_date, char *date) {
   Date first_date = str_to_date(current_date);
   Date second_date = str_to_date(date);
@@ -56,6 +67,12 @@ int is_date_bigger(char *current_date, char *date) {
   return 0;
 }
 
+/**
+ * @brief Checks if current_date is strictly smaller than date
+ * @param current_date The current date string
+ * @param date The date string to compare against
+ * @return 1 if current_date is smaller, 0 otherwise
+ */
 int is_date_small(char *current_date, char *date) {
   Date first_date = str_to_date(current_date);
   Date second_date = str_to_date(date);

@@ -8,5 +8,11 @@
 #define FIRST_DAY_INDEX_POSITION 8
 #define LAST_DAY_INDEX_POSITION 9
 #define DATE_LENGTH 10
+/**
+ * @brief Searches for history indexes for a given date
+ * @param history_arr The history array
+ * @param date The date to search
+ * @param indexes The resulting indexes
+ */
 void search_history_indexes(HistoryArray *history_arr, char *date, int *indexes);
 #endif
