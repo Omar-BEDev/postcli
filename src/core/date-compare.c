@@ -11,26 +11,26 @@ Date str_to_date(char *date) {
   int day = 0;
   int i = 1;
   int year_length_value = 1000;
-  year = (date[0] - 48) * year_length_value;
+  year = (date[0] - '0') * year_length_value;
   while (i < DATE_LENGTH) {
     if (i <= LAST_YEAR_INDEX_POSITION) {
       year_length_value /= 10;
-      year += (date[i] - 48) * (year_length_value);
+      year += (date[i] - '0') * (year_length_value);
     }
     if (i >= FIRST_MONTH_INDEX_POSITION && i <= LAST_MONTH_INDEX_POSITION) {
       if (i == LAST_MONTH_INDEX_POSITION) {
-        month += date[i] - 48;
+        month += date[i] - '0';
       }
       else {
-      month += (date[i] - 48) * 10;
+      month += (date[i] - '0') * 10;
       }
     }
     if (i >= FIRST_DAY_INDEX_POSITION && i <= LAST_DAY_INDEX_POSITION) {
       if (i == LAST_DAY_INDEX_POSITION) {
-        day += date[i] - 48;
+        day += date[i] - '0';
       }
       else {
-      day += (date[i] - 48) * 10;
+      day += (date[i] - '0') * 10;
       }
     }
     i++;
