@@ -3,3 +3,5 @@ output
 test.log
 postcli
 **.o
+test/run_tests
+/core

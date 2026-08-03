@@ -1,5 +1,10 @@
 #ifndef CHECK_FILE
 #define CHECK_FILE
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @brief Checks if a file is available
  * @param file_name The name of the file to check
@@ -7,4 +12,7 @@
  */
 int is_file_available(const char *file_name);
 
+#ifdef __cplusplus
+}
+#endif
 #endif

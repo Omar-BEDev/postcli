@@ -1,6 +1,11 @@
 #ifndef SEARCH
 #define SEARCH
 #include "../../utils/dynamic-array.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @brief Finds the first history index for a date
  * @param history_arr The history array
@@ -27,4 +32,8 @@ void first_history_index(HistoryArray *history_arr, int low,
 void last_history_index(HistoryArray *history_arr, int low, 
                          int high, int mid,
                          char *date, int *indexes, int match);
+
+#ifdef __cplusplus
+}
+#endif
 #endif
