@@ -9,13 +9,6 @@
 #define DATE_LENGTH 10
 #define FIRST_MESSAGE_INDERX_POSITION 11
 
-/**
- * @brief Extracts logs from a given path
- * @param history_arr The history array to extract to
- * @param path The path of the log file
- */
-void extract_logs(HistoryArray *history_arr, char *path);
-
 #if defined (__linux__)
     #include "sys/stat.h"
     #include "sys/types.h"
@@ -23,9 +16,24 @@ void extract_logs(HistoryArray *history_arr, char *path);
     #define make_folder(dir) mkdir(dir, 0755)  
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Extracts logs from a given path
+ * @param history_arr The history array to extract to
+ * @param path The path of the log file
+ */
+void extract_logs(HistoryArray *history_arr, char *path);
+
 /**
  * @brief Generates the path for the log directory
  * @param dir The directory path
  */
 void log_path_generate(char *dir);
+
+#ifdef __cplusplus
+}
+#endif
 #endif

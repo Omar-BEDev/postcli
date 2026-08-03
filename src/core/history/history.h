@@ -8,6 +8,11 @@
 #define FIRST_DAY_INDEX_POSITION 8
 #define LAST_DAY_INDEX_POSITION 9
 #define DATE_LENGTH 10
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @brief Searches for history indexes for a given date
  * @param history_arr The history array
@@ -15,4 +20,8 @@
  * @param indexes The resulting indexes
  */
 void search_history_indexes(HistoryArray *history_arr, char *date, int *indexes);
+
+#ifdef __cplusplus
+}
+#endif
 #endif

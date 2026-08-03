@@ -13,6 +13,10 @@ typedef struct HistoryArray {
     void (*remove_history_log) (struct HistoryArray *history_arr);
 } HistoryArray ;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @brief Adds a history log to the array
  * @param history_arr The history array
@@ -20,4 +24,8 @@ typedef struct HistoryArray {
  * @param message The log message
  */
 void add_history_log(HistoryArray *history_arr, char *date, char *message);
+
+#ifdef __cplusplus
+}
+#endif
 #endif

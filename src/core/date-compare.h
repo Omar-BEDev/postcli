@@ -9,6 +9,9 @@ typedef struct Date{
     int day;
 } Date;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /**
  * @brief Converts a string to a Date structure
@@ -30,4 +33,8 @@ int is_date_bigger(char *current_date, char *date);
  * @return 1 if current_date is smaller, 0 otherwise
  */
 int is_date_small(char *current_date, char *date);
+
+#ifdef __cplusplus
+}
+#endif
 #endif
