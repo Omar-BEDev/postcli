@@ -6,19 +6,9 @@
 #include <gtest/gtest.h>
 #include <cstdlib>
 
-static void free_history(HistoryArray *arr) {
-    for (int i = 0; i < arr->length; i++) {
-        free(arr->history[i]->date);
-        free(arr->history[i]->message);
-        free(arr->history[i]);
-    }
-    free(arr->history);
-    arr->history = nullptr;
-    arr->length = 0;
-}
-
 static HistoryArray make_array(const char *const *dates, const char *const *msgs, int n) {
     HistoryArray arr = {};
+    initialize_history_array(&arr);
     for (int i = 0; i < n; i++) {
         add_history_log(&arr, (char *)dates[i], (char *)msgs[i]);
     }
@@ -33,7 +23,7 @@ TEST(SearchHistoryIndexes, SingleMatch) {
     search_history_indexes(&arr, (char *)"2026/01/02", indexes);
     EXPECT_EQ(indexes[0], 1);
     EXPECT_EQ(indexes[1], 1);
-    free_history(&arr);
+    free_history_array(&arr);
 }
 
 TEST(SearchHistoryIndexes, DuplicateDates) {
@@ -44,7 +34,7 @@ TEST(SearchHistoryIndexes, DuplicateDates) {
     search_history_indexes(&arr, (char *)"2026/01/01", indexes);
     EXPECT_EQ(indexes[0], 0);
     EXPECT_EQ(indexes[1], 1);
-    free_history(&arr);
+    free_history_array(&arr);
 }
 
 TEST(SearchHistoryIndexes, AbsentDate) {
@@ -55,7 +45,7 @@ TEST(SearchHistoryIndexes, AbsentDate) {
     search_history_indexes(&arr, (char *)"2026/01/05", indexes);
     EXPECT_EQ(indexes[0], -1);
     EXPECT_EQ(indexes[1], -1);
-    free_history(&arr);
+    free_history_array(&arr);
 }
 
 TEST(SearchHistoryIndexes, SingleElement) {
@@ -66,7 +56,7 @@ TEST(SearchHistoryIndexes, SingleElement) {
     search_history_indexes(&arr, (char *)"2026/01/01", indexes);
     EXPECT_EQ(indexes[0], 0);
     EXPECT_EQ(indexes[1], 0);
-    free_history(&arr);
+    free_history_array(&arr);
 }
 
 TEST(SearchHistoryIndexes, EmptyArray) {
@@ -84,7 +74,7 @@ TEST(FirstHistoryIndex, PresentDate) {
     int indexes[2] = {-1, -1};
     first_history_index(&arr, 0, 2, 0, (char *)"2026/01/02", indexes, 0);
     EXPECT_EQ(indexes[0], 1);
-    free_history(&arr);
+    free_history_array(&arr);
 }
 
 TEST(FirstHistoryIndex, AbsentDateNonEmpty) {
@@ -94,7 +84,7 @@ TEST(FirstHistoryIndex, AbsentDateNonEmpty) {
     int indexes[2] = {-1, -1};
     first_history_index(&arr, 0, 2, 0, (char *)"2026/01/05", indexes, 0);
     EXPECT_EQ(indexes[0], -1);
-    free_history(&arr);
+    free_history_array(&arr);
 }
 
 TEST(FirstHistoryIndex, EmptyArray) {
@@ -110,7 +100,7 @@ TEST(LastHistoryIndex, PresentDate) {
     int indexes[2] = {-1, -1};
     last_history_index(&arr, 0, 2, 0, (char *)"2026/01/02", indexes, 0);
     EXPECT_EQ(indexes[1], 1);
-    free_history(&arr);
+    free_history_array(&arr);
 }
 
 TEST(LastHistoryIndex, AbsentDateNonEmpty) {
@@ -120,7 +110,7 @@ TEST(LastHistoryIndex, AbsentDateNonEmpty) {
     int indexes[2] = {-1, -1};
     last_history_index(&arr, 0, 2, 0, (char *)"2026/01/05", indexes, 0);
     EXPECT_EQ(indexes[1], -1);
-    free_history(&arr);
+    free_history_array(&arr);
 }
 
 TEST(LastHistoryIndex, EmptyArray) {

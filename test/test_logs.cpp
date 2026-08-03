@@ -14,17 +14,6 @@ extern "C" void make_log_dir(char *program_path, char *dir,
 extern "C" void make_log_folder_dir(char *folder_path, char *dir,
                                     char *program_folder_name);
 
-static void free_history(HistoryArray *arr) {
-    for (int i = 0; i < arr->length; i++) {
-        free(arr->history[i]->date);
-        free(arr->history[i]->message);
-        free(arr->history[i]);
-    }
-    free(arr->history);
-    arr->history = nullptr;
-    arr->length = 0;
-}
-
 static HistoryArray read_file(const char *content) {
     const char *path = "test/logs_tmp.log";
     FILE *f = fopen(path, "w");
@@ -32,7 +21,7 @@ static HistoryArray read_file(const char *content) {
     fclose(f);
 
     HistoryArray arr = {};
-    arr.add_history_log = add_history_log;
+    initialize_history_array(&arr);
     FILE *in = fopen(path, "r");
     read_file_logs(&arr, in);
     fclose(in);
@@ -52,13 +41,13 @@ TEST(ReadFileLogs, ValidLines) {
     EXPECT_STREQ(arr.history[1]->message, "second log");
     EXPECT_STREQ(arr.history[2]->date, "2026/12/31");
     EXPECT_STREQ(arr.history[2]->message, "last");
-    free_history(&arr);
+    free_history_array(&arr);
 }
 
 TEST(ReadFileLogs, EmptyFile) {
     HistoryArray arr = read_file("");
     EXPECT_EQ(arr.length, 0);
-    free_history(&arr);
+    free_history_array(&arr);
 }
 
 TEST(ReadFileLogs, EmptyLineInMiddle) {
@@ -70,7 +59,7 @@ TEST(ReadFileLogs, EmptyLineInMiddle) {
     EXPECT_STREQ(arr.history[0]->date, "2026/01/01");
     EXPECT_STREQ(arr.history[1]->date, "2026/03/04");
     EXPECT_STREQ(arr.history[1]->message, "third log");
-    free_history(&arr);
+    free_history_array(&arr);
 }
 
 TEST(ReadFileLogs, ShortFirstLine) {
@@ -80,7 +69,7 @@ TEST(ReadFileLogs, ShortFirstLine) {
     ASSERT_EQ(arr.length, 1);
     EXPECT_STREQ(arr.history[0]->date, "2026/01/01");
     EXPECT_STREQ(arr.history[0]->message, "ok");
-    free_history(&arr);
+    free_history_array(&arr);
 }
 
 TEST(ReadFileLogs, LastLineWithoutNewline) {
@@ -90,7 +79,7 @@ TEST(ReadFileLogs, LastLineWithoutNewline) {
     ASSERT_EQ(arr.length, 2);
     EXPECT_STREQ(arr.history[1]->date, "2026/02/03");
     EXPECT_STREQ(arr.history[1]->message, "no newline");
-    free_history(&arr);
+    free_history_array(&arr);
 }
 
 TEST(ExtractLogs, ExistingFile) {
@@ -101,22 +90,22 @@ TEST(ExtractLogs, ExistingFile) {
     fclose(f);
 
     HistoryArray arr = {};
-    arr.add_history_log = add_history_log;
+    initialize_history_array(&arr);
     extract_logs(&arr, (char *)path);
     remove(path);
 
     ASSERT_EQ(arr.length, 1);
     EXPECT_STREQ(arr.history[0]->date, "2026/01/01");
     EXPECT_STREQ(arr.history[0]->message, "hello");
-    free_history(&arr);
+    free_history_array(&arr);
 }
 
 TEST(ExtractLogs, NonexistentFileNoCrash) {
     HistoryArray arr = {};
-    arr.add_history_log = add_history_log;
+    initialize_history_array(&arr);
     EXPECT_NO_FATAL_FAILURE(extract_logs(&arr, (char *)"test/does_not_exist_tmp.log"));
     EXPECT_EQ(arr.length, 0);
-    free_history(&arr);
+    free_history_array(&arr);
 }
 
 TEST(ReadFileLogs, UnwiredFunctionPointerCrashes) {
