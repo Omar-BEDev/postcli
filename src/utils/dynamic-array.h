@@ -24,6 +24,16 @@ extern "C" {
  * @param message The log message
  */
 void add_history_log(HistoryArray *history_arr, char *date, char *message);
+/**
+ * @brief Initializes a history array struct
+ * @param history_arr The history array to initialize
+ */
+void initialize_history_array(HistoryArray *history_arr);
+/**
+ * @brief Frees all memory allocated for the history array
+ * @param history_arr The history array to free
+ */
+void free_history_array(HistoryArray *history_arr);
 
 #ifdef __cplusplus
 }

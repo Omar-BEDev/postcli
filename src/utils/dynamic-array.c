@@ -39,3 +39,42 @@ void remove_history_log(char* file_name) {
     }
     fclose(log_file);
 }
+
+/**
+ * @brief Initializes a history array struct
+ * @param history_arr The history array to initialize
+ */
+void initialize_history_array(HistoryArray *history_arr) {
+    if (history_arr == NULL) {
+        printf("error : history array not found");
+        return;
+    }
+    history_arr->history = NULL;
+    history_arr->length = 0;
+    /*
+     * Wires the add handler so callers (e.g. extract_logs / read_file_logs)
+     * can use the array out of the box without manual setup.
+     * remove_history_log is intentionally left NULL because the free function
+     * takes a file name (char*) while the struct member expects a HistoryArray*.
+     */
+    history_arr->add_history_log = add_history_log;
+    history_arr->remove_history_log = NULL;
+}
+
+/**
+ * @brief Frees all memory allocated for the history array
+ * @param history_arr The history array to free
+ */
+void free_history_array(HistoryArray *history_arr) {
+    if (history_arr == NULL) {
+        return;
+    }
+    for (int i = 0; i < history_arr->length; i++) {
+        free(history_arr->history[i]->date);
+        free(history_arr->history[i]->message);
+        free(history_arr->history[i]);
+    }
+    free(history_arr->history);
+    history_arr->history = NULL;
+    history_arr->length = 0;
+}
