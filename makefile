@@ -1,4 +1,5 @@
 CC = gcc
+CXX = g++
 
 CFLAGS = -Wall -Wextra -g -Isrc 
 TARGET = postcli
@@ -23,5 +24,29 @@ $(TARGET): $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# ===================== Tests =====================
+TEST_CXXFLAGS = -Wall -Wextra -g -Isrc
+TEST_SRCS = $(filter-out src/main.c,$(SRCS))
+TEST_OBJS = $(TEST_SRCS:.c=.o)
+TEST_CPP = test/test_main.cpp \
+           test/test_date.cpp \
+           test/test_dynamic_array.cpp \
+           test/test_search.cpp \
+           test/test_file.cpp \
+           test/test_logs.cpp \
+           test/test_before_start.cpp \
+           test/test_start.cpp
+TEST_OBJS += $(TEST_CPP:.cpp=.o)
+TEST_TARGET = test/run_tests
+
+test: $(TEST_TARGET)
+	$(TEST_TARGET)
+
+$(TEST_TARGET): $(TEST_OBJS)
+	$(CXX) $(TEST_CXXFLAGS) -o $@ $(TEST_OBJS) -lgtest -pthread
+
+%.o: %.cpp
+	$(CXX) $(TEST_CXXFLAGS) -c $< -o $@
+
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(TARGET) test/*.o $(TEST_TARGET)
