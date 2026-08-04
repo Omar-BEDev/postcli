@@ -10,7 +10,7 @@ typedef struct HistoryArray {
     History **history;    
     int length;
     void (*add_history_log) (struct HistoryArray *str_arr, char *date, char *message);
-    void (*remove_history_log) (struct HistoryArray *history_arr);
+    void (*remove_history_log) (char *file_name);
 } HistoryArray ;
 
 #ifdef __cplusplus
