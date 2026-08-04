@@ -1,0 +1,6 @@
+hello in postcli tool this command you need it to start:
+
+1 - "new Req [type] [apilink]" #for make a new request with types (GET, POST, PUT, DELETE)
+2 - "new Req [type] [apilink] [number] " #for make a lot of requests
+3 - "new Apilink" #for add a default api link  
+
