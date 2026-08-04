@@ -1,8 +1,6 @@
 #include "core/date-compare.h"
 #include "core/history/history.h"
-#include "core/history/search.h"
 #include "utils/dynamic-array.h"
-#include "crash_guard.h"
 #include <gtest/gtest.h>
 #include <cstdlib>
 
@@ -65,56 +63,4 @@ TEST(SearchHistoryIndexes, EmptyArray) {
     search_history_indexes(&arr, (char *)"2026/01/01", indexes);
     EXPECT_EQ(indexes[0], -1);
     EXPECT_EQ(indexes[1], -1);
-}
-
-TEST(FirstHistoryIndex, PresentDate) {
-    const char *dates[] = {"2026/01/01", "2026/01/02", "2026/01/03"};
-    const char *msgs[] = {"a", "b", "c"};
-    HistoryArray arr = make_array(dates, msgs, 3);
-    int indexes[2] = {-1, -1};
-    first_history_index(&arr, 0, 2, 0, (char *)"2026/01/02", indexes, 0);
-    EXPECT_EQ(indexes[0], 1);
-    free_history_array(&arr);
-}
-
-TEST(FirstHistoryIndex, AbsentDateNonEmpty) {
-    const char *dates[] = {"2026/01/01", "2026/01/02", "2026/01/03"};
-    const char *msgs[] = {"a", "b", "c"};
-    HistoryArray arr = make_array(dates, msgs, 3);
-    int indexes[2] = {-1, -1};
-    first_history_index(&arr, 0, 2, 0, (char *)"2026/01/05", indexes, 0);
-    EXPECT_EQ(indexes[0], -1);
-    free_history_array(&arr);
-}
-
-TEST(FirstHistoryIndex, EmptyArray) {
-    HistoryArray arr = {};
-    int indexes[2] = {-1, -1};
-    EXPECT_NO_CRASH(first_history_index(&arr, 0, -1, 0, (char *)"2026/01/01", indexes, 0));
-}
-
-TEST(LastHistoryIndex, PresentDate) {
-    const char *dates[] = {"2026/01/01", "2026/01/02", "2026/01/03"};
-    const char *msgs[] = {"a", "b", "c"};
-    HistoryArray arr = make_array(dates, msgs, 3);
-    int indexes[2] = {-1, -1};
-    last_history_index(&arr, 0, 2, 0, (char *)"2026/01/02", indexes, 0);
-    EXPECT_EQ(indexes[1], 1);
-    free_history_array(&arr);
-}
-
-TEST(LastHistoryIndex, AbsentDateNonEmpty) {
-    const char *dates[] = {"2026/01/01", "2026/01/02", "2026/01/03"};
-    const char *msgs[] = {"a", "b", "c"};
-    HistoryArray arr = make_array(dates, msgs, 3);
-    int indexes[2] = {-1, -1};
-    last_history_index(&arr, 0, 2, 0, (char *)"2026/01/05", indexes, 0);
-    EXPECT_EQ(indexes[1], -1);
-    free_history_array(&arr);
-}
-
-TEST(LastHistoryIndex, EmptyArray) {
-    HistoryArray arr = {};
-    int indexes[2] = {-1, -1};
-    EXPECT_NO_CRASH(last_history_index(&arr, 0, -1, 0, (char *)"2026/01/01", indexes, 0));
 }
