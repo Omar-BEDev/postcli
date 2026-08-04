@@ -3,8 +3,6 @@
 #include <cstdio>
 #include <cstdlib>
 
-extern "C" void remove_history_log(char *file_name);
-
 TEST(AddHistoryLog, FreshArray) {
     HistoryArray arr = {};
     initialize_history_array(&arr);
@@ -111,4 +109,61 @@ TEST(RemoveHistoryLog, MissingFileNoCrash) {
     const char *path = "test/does_not_exist_tmp.log";
     EXPECT_NO_FATAL_FAILURE(remove_history_log((char *)path));
     remove(path);
+}
+
+TEST(RemoveHistoryLog, ClearsContentOnReopen) {
+    const char *path = "test/remove_reopen_tmp.log";
+    FILE *f = fopen(path, "w");
+    ASSERT_NE(f, nullptr);
+    fputs("2026/01/01 hello\n2026/01/02 world\n", f);
+    fclose(f);
+
+    remove_history_log((char *)path);
+
+    f = fopen(path, "r");
+    ASSERT_NE(f, nullptr);
+    char buf[16] = {0};
+    size_t n = fread(buf, 1, sizeof(buf) - 1, f);
+    fclose(f);
+    remove(path);
+    EXPECT_EQ(n, 0);
+}
+
+TEST(RemoveHistoryLog, EmptyFileStaysEmpty) {
+    const char *path = "test/remove_empty_tmp.log";
+    FILE *f = fopen(path, "w");
+    ASSERT_NE(f, nullptr);
+    fclose(f);
+
+    remove_history_log((char *)path);
+
+    f = fopen(path, "r");
+    ASSERT_NE(f, nullptr);
+    fseek(f, 0, SEEK_END);
+    long size = ftell(f);
+    fclose(f);
+    remove(path);
+    EXPECT_EQ(size, 0);
+}
+
+TEST(RemoveHistoryLog, ViaFunctionPointer) {
+    HistoryArray arr = {};
+    initialize_history_array(&arr);
+    ASSERT_NE(arr.remove_history_log, nullptr);
+
+    const char *path = "test/remove_pointer_tmp.log";
+    FILE *f = fopen(path, "w");
+    ASSERT_NE(f, nullptr);
+    fputs("2026/01/01 hello\n", f);
+    fclose(f);
+
+    arr.remove_history_log((char *)path);
+
+    f = fopen(path, "r");
+    ASSERT_NE(f, nullptr);
+    fseek(f, 0, SEEK_END);
+    long size = ftell(f);
+    fclose(f);
+    remove(path);
+    EXPECT_EQ(size, 0);
 }

@@ -25,6 +25,11 @@ extern "C" {
  */
 void add_history_log(HistoryArray *history_arr, char *date, char *message);
 /**
+ * @brief Removes the content of the history log file
+ * @param file_name The name of the file to remove
+ */
+void remove_history_log(char *file_name);
+/**
  * @brief Initializes a history array struct
  * @param history_arr The history array to initialize
  */
