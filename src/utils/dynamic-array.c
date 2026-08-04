@@ -12,7 +12,7 @@
  * @param message The log message
  */
 void add_history_log(HistoryArray *history_arr, char *date, char *message) {
-    if (history_arr == NULL) {
+    if (history_arr == NULL || history_arr->add_history_log == NULL) {
         printf("error : history not found");
         return;
     }
@@ -58,7 +58,7 @@ void initialize_history_array(HistoryArray *history_arr) {
      * takes a file name (char*) while the struct member expects a HistoryArray*.
      */
     history_arr->add_history_log = add_history_log;
-    history_arr->remove_history_log = NULL;
+    history_arr->remove_history_log = remove_history_log;
 }
 
 /**
