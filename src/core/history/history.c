@@ -11,6 +11,8 @@
  */
 void search_history_indexes(HistoryArray *history_arr, char *date, int *indexes) {
     if (history_arr->length == 0) {
+        indexes[0] = -1;
+        indexes[1] = -1;
         printf("error: logs not found");
         return;
     }
